@@ -1,4 +1,6 @@
 # IP-GAME
  Repositório para o jogo sobre IP da GameJam
+ 
+## Explicação de como o jogo irá funcionar
 
-## Inicio do markdown
+## Visão do Negocio
