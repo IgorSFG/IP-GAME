@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 signal search_pressed
 signal develop_pressed
+signal feelings_pressed
+signal historic_pressed
 
 var namee = ""
 var money = 1000
@@ -19,7 +21,6 @@ func _ready():
 	$HUD/GridContainer/Money.text = "$" + str(money)
 	$HUD/GridContainer/Day.text = "Day: 1"
 	$PlayerArt/AnimationPlayer.play("Idle")
-	
 
 #func _process(delta):
 #	pass
@@ -39,8 +40,16 @@ func _on_GoActions_toggled(button_pressed):
 	else: $Actions.visible = false
 
 func _on_Search_button_down():
-	emit_signal("search_pressed")
+	emit_signal("search_pressed", [generalLevel])
 
 
 func _on_Develop_button_down():
-	emit_signal("develop_pressed")
+	emit_signal("develop_pressed", [generalLevel], [namee])
+
+
+func _on_Feelings_button_down():
+	emit_signal("feelings_pressed", [namee])
+
+
+func _on_Historic_button_down():
+	emit_signal("historic_pressed")

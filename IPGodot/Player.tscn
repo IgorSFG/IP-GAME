@@ -79,14 +79,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Historic" type="Button" parent="Actions"]
-margin_left = -14.0
-margin_top = 14.0
-margin_right = 51.0
-margin_bottom = 34.0
-rect_scale = Vector2( 0.25, 0.25 )
-text = "Historic"
-
 [node name="Feelings" type="Button" parent="Actions"]
 margin_left = 38.0
 margin_top = 14.0
@@ -94,31 +86,20 @@ margin_right = 103.0
 margin_bottom = 34.0
 rect_scale = Vector2( 0.25, 0.25 )
 text = "Feelings"
-
-[node name="Dialogue" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="Dialogue"]
-margin_left = -29.0
-margin_top = 9.0
-margin_right = 30.0
-margin_bottom = 27.0
-color = Color( 0, 0, 0, 1 )
+[node name="Historic" type="Button" parent="Actions"]
+margin_left = -14.0
+margin_top = 14.0
+margin_right = 51.0
+margin_bottom = 34.0
+rect_scale = Vector2( 0.25, 0.25 )
+text = "Historic"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Text" type="RichTextLabel" parent="Dialogue/ColorRect"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 286.0
-margin_bottom = 81.0
-rect_scale = Vector2( 0.2, 0.2 )
-text = "Dialogue"
 
 [node name="GoActions" type="Button" parent="."]
 modulate = Color( 1, 1, 1, 0 )
@@ -175,4 +156,6 @@ zoom = Vector2( 0.2, 0.2 )
 
 [connection signal="button_down" from="Actions/Develop" to="." method="_on_Develop_button_down"]
 [connection signal="button_down" from="Actions/Search" to="." method="_on_Search_button_down"]
+[connection signal="button_down" from="Actions/Feelings" to="." method="_on_Feelings_button_down"]
+[connection signal="button_down" from="Actions/Historic" to="." method="_on_Historic_button_down"]
 [connection signal="toggled" from="GoActions" to="." method="_on_GoActions_toggled"]
