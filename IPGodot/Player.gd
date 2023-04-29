@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal search_pressed
+
 var namee = ""
 var money = 1000
 var generalLevel = 1
@@ -12,18 +14,28 @@ var patentLevel = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$HUD/GridContainer/Money.text = "$" + str(money) + ",00"
+	$Actions.visible = false
+	$HUD/GridContainer/Money.text = "$" + str(money)
+	$HUD/GridContainer/Day.text = "Day: 1"
+	$PlayerArt/AnimationPlayer.play("Idle")
+	
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
 func payMoney(pay):
 	money = round(money - pay)
-	$HUD/GridContainer/Money.text = "$" + str(money) + ",00"
+	$HUD/GridContainer/Money.text = "$" + str(money)
 	
 
-
 func _on_Main_daypassed(day):
-	payMoney(500)
+	$HUD/GridContainer/Day.text = "Day: " + str(day)
+	if day >= 30:
+		payMoney(500)
+
+func _on_GoActions_toggled(button_pressed):
+	if $Actions.visible == false: $Actions.visible = true
+	else: $Actions.visible = false
+
+func _on_Search_button_down():
+	emit_signal("search_pressed")

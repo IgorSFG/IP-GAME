@@ -8,13 +8,13 @@ resource_name = "Idle"
 length = 1.8
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("PlayerArt/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 0, 1 ]
@@ -23,7 +23,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("PlayerArt/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -32,30 +32,22 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 1 ]
+"values": [ 0 ]
 }
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="PlayerArt" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="PlayerArt"]
 texture = ExtResource( 1 )
 vframes = 2
-frame = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerArt"]
+root_node = NodePath("../..")
 anims/Idle = SubResource( 1 )
 anims/RESET = SubResource( 2 )
-
-[node name="Button" type="Button" parent="."]
-margin_left = -7.0
-margin_top = -8.0
-margin_right = 6.0
-margin_bottom = 12.0
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Actions" type="Control" parent="."]
 margin_left = -20.0
@@ -66,55 +58,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Develop" type="MenuButton" parent="Actions"]
+[node name="Develop" type="Button" parent="Actions"]
 margin_left = 24.0
 margin_top = 6.0
 margin_right = 89.0
 margin_bottom = 26.0
 rect_scale = Vector2( 0.25, 0.25 )
 text = "Develop"
-flat = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Search" type="MenuButton" parent="Actions"]
+[node name="Search" type="Button" parent="Actions"]
 margin_top = 6.0
 margin_right = 65.0
 margin_bottom = 26.0
 rect_scale = Vector2( 0.25, 0.25 )
-focus_mode = 2
 text = "Search"
-flat = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Historic" type="MenuButton" parent="Actions"]
+[node name="Historic" type="Button" parent="Actions"]
 margin_left = -14.0
 margin_top = 14.0
 margin_right = 51.0
 margin_bottom = 34.0
 rect_scale = Vector2( 0.25, 0.25 )
-focus_mode = 2
 text = "Historic"
-flat = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Feelings" type="MenuButton" parent="Actions"]
+[node name="Feelings" type="Button" parent="Actions"]
 margin_left = 38.0
 margin_top = 14.0
 margin_right = 103.0
 margin_bottom = 34.0
 rect_scale = Vector2( 0.25, 0.25 )
-focus_mode = 2
 text = "Feelings"
-flat = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Dialogue" type="Control" parent="."]
 margin_right = 40.0
@@ -141,6 +117,21 @@ margin_bottom = 81.0
 rect_scale = Vector2( 0.2, 0.2 )
 text = "Dialogue"
 
+[node name="GoActions" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = -7.0
+margin_top = -8.0
+margin_right = 6.0
+margin_bottom = 12.0
+toggle_mode = true
+shortcut_in_tooltip = false
+flat = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HUD" type="Control" parent="."]
 margin_left = -99.0
 margin_top = -56.0
@@ -154,16 +145,30 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="HUD"]
 margin_right = 44.0
 margin_bottom = 14.0
-columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Money" type="Label" parent="HUD/GridContainer"]
-margin_right = 40.0
+[node name="GeneralLevel" type="Label" parent="HUD/GridContainer"]
+margin_right = 104.0
 margin_bottom = 14.0
+text = "General Level: 1"
+
+[node name="Money" type="Label" parent="HUD/GridContainer"]
+margin_top = 18.0
+margin_right = 104.0
+margin_bottom = 32.0
 text = "$1000"
+
+[node name="Day" type="Label" parent="HUD/GridContainer"]
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 50.0
+text = "Day: 1"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.2, 0.2 )
+
+[connection signal="button_down" from="Actions/Search" to="." method="_on_Search_button_down"]
+[connection signal="toggled" from="GoActions" to="." method="_on_GoActions_toggled"]

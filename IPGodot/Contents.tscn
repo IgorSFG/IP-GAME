@@ -1,0 +1,19 @@
+[gd_scene format=2]
+
+[node name="Contents" type="Panel"]
+margin_right = 71.0
+margin_bottom = 5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_right = 280.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.25, 0.25 )
+text = "Item"
+flat = true
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
