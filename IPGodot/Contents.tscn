@@ -1,8 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Contents.gd" type="Script" id=1]
 
 [node name="Contents" type="Panel"]
 margin_right = 71.0
 margin_bottom = 5.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -17,3 +20,5 @@ align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]

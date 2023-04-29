@@ -65,6 +65,9 @@ margin_right = 89.0
 margin_bottom = 26.0
 rect_scale = Vector2( 0.25, 0.25 )
 text = "Develop"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Search" type="Button" parent="Actions"]
 margin_top = 6.0
@@ -170,5 +173,6 @@ text = "Day: 1"
 current = true
 zoom = Vector2( 0.2, 0.2 )
 
+[connection signal="button_down" from="Actions/Develop" to="." method="_on_Develop_button_down"]
 [connection signal="button_down" from="Actions/Search" to="." method="_on_Search_button_down"]
 [connection signal="toggled" from="GoActions" to="." method="_on_GoActions_toggled"]

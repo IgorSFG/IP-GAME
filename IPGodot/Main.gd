@@ -44,6 +44,11 @@ func _on_Player_search_pressed():
 	for ip in IPcontent:
 		add_content(ip)
 		count += 1
+		
+
+func _on_Player_develop_pressed():
+	$Panel.visible = true
+
 
 
 func _on_ExitButton_button_down():

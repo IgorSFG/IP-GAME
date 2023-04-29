@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal search_pressed
+signal develop_pressed
 
 var namee = ""
 var money = 1000
@@ -39,3 +40,7 @@ func _on_GoActions_toggled(button_pressed):
 
 func _on_Search_button_down():
 	emit_signal("search_pressed")
+
+
+func _on_Develop_button_down():
+	emit_signal("develop_pressed")

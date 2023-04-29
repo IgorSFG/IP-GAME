@@ -20,3 +20,17 @@ var missing = ["Hummmm... I need search for something to develop first!",
 
 var doubts = [""]
 	
+
+
+func _on_Button_button_down():
+	var position = 0
+	for dev in DEVcontent:
+		if $Button.text == dev:
+			DEVcontent.erase(dev)
+		position += 1
+	
+	position = 0
+	for ip in IPcontent:
+		if $Button.text == ip:
+			IPcontent.erase(ip)
+		position += 1
