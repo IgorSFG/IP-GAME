@@ -3,8 +3,8 @@
 [ext_resource path="res://Contents.gd" type="Script" id=1]
 
 [node name="Contents" type="Panel"]
-margin_right = 71.0
-margin_bottom = 5.0
+margin_right = 75.0
+margin_bottom = 10.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -14,9 +14,20 @@ __meta__ = {
 margin_right = 280.0
 margin_bottom = 20.0
 rect_scale = Vector2( 0.25, 0.25 )
-text = "Item"
 flat = true
 align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="ContentButton"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 229.0
+margin_bottom = 34.0
+rect_scale = Vector2( 1.25, 1.25 )
+text = "Item"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

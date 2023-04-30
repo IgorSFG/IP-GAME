@@ -71,7 +71,9 @@ __meta__ = {
 
 [node name="List" type="VBoxContainer" parent="Panel/Scroll"]
 
+[connection signal="contentDeveloped" from="." to="Player" method="_on_Main_contentDeveloped"]
 [connection signal="daypassed" from="." to="Player" method="_on_Main_daypassed"]
 [connection signal="button_down" from="ExitButton" to="." method="_on_ExitButton_button_down"]
+[connection signal="_invisible" from="Player" to="." method="_on_Player__invisible"]
 [connection signal="develop_pressed" from="Player" to="." method="_on_Player_develop_pressed"]
 [connection signal="search_pressed" from="Player" to="." method="_on_Player_search_pressed"]
