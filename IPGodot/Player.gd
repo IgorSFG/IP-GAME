@@ -8,7 +8,7 @@ signal _invisible
 
 var namee = ""
 var money = 1000
-var generallevel = 100
+var generallevel = 5
 var booklevel = 0
 var artlevel = 0
 var applevel = 0
