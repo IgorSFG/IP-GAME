@@ -6,6 +6,7 @@ const listcontents = preload("res://Contents.gd")
 #Search/Dev
 const DEVcontent = listcontents.DEVcontent
 const IPcontent = listcontents.IPcontent
+const LRNcontent = listcontents.LRNcontent
 
 #Feelings
 const intro = listcontents.introduce
@@ -14,23 +15,19 @@ const doubt = listcontents.doubts
 
 const daytime = 0.1
 
-var devcontent = []
-var ipcontent = []
+var contents = []
 
 var timer = Timer.new()
 var day = 1
 
 signal daypassed(day)
+signal contentDeveloped(content)
 
 func _ready():
-	$Panel.visible = false
-	$Dialogue.visible = false
-	timing("timeLefting", daytime, false)
-
-func timing(_func, time, shot):
-	timer.connect("timeout",self,_func)
-	timer.wait_time = time
-	timer.one_shot = shot
+	_invisible()
+	timer.connect("timeout",self,"timeLefting")
+	timer.wait_time = daytime
+	timer.one_shot = false
 	add_child(timer)
 	timer.start()
 	
@@ -47,57 +44,74 @@ func showDialogue(dialogue, namee):
 func add_content(value, context):
 	var content = ListContents.instance()
 	var contentButton = content.get_node("ContentButton")
-	contentButton.text = value
+	var contentText = content.get_node("ContentButton/Text")
+	contentText.text = str(value)
 	
-	if context == "search": contentButton.connect("pressed", self, "contentSearch", [contentButton.text])
-	elif context == "develop": contentButton.connect("pressed", self, "contentDevelop", [contentButton.text])
+	if context == "search": contentButton.connect("pressed", self, "contentSearched", [contentText.text])
+	elif context == "develop": contentButton.connect("pressed", self, "contentDeveloped", [contentText.text])
 	
 	content.rect_min_size = Vector2(75,5)
 	$Panel/Scroll/List.add_child(content)
 	
-func contentSearch(content):
+func contentSearched(content):
 	print("Searching...")
-	if devcontent.has(content): return
-	devcontent.append(content)
-	DEVcontent.erase(content)
-	IPcontent.erase(content)
+	if contents.has(content) or contents.has(content): return
+	contents.append(content)
+	_invisible()
+	contentLearned(content)
 
-func contentDevelop(content):
-	pass
+func contentDeveloped(content):
+	emit_signal("contentDeveloped", content)
+	
+
+func contentLearned(content):
+		if IPcontent.has(content):
+			var pos = IPcontent.find(content)
+			add_content(LRNcontent[pos], "0")
+			$Panel.visible = true
+
 
 func _on_Player_search_pressed(level):
-	$Panel.visible = true
-	
 	var count = 0
 	for dev in DEVcontent:
-		add_content(dev, "search")
-		count += 1
+		if level >= count:
+			if !contents.has(dev):
+				add_content(dev, "search")
+		count += 5
 
-	count = 0
+	count = 10
 	for ip in IPcontent:
-		add_content(ip, "search")
-		count += 1
+		if level >= count:
+			if !contents.has(ip):
+				add_content(ip, "search")
+		count += 10
+		
+	$Panel.visible = true
 
 func _on_Player_develop_pressed(level, namee):
 	print("Develop Pressed")
-	if devcontent.empty():
+	if contents.empty(): 
 		showDialogue(miss[0], namee)
 		return
 		
-	var count = 0
-	for dev in devcontent:
-		add_content(dev, "develop")
-		count += 1
-	
-	
-	
+	for dev in contents:
+		if !IPcontent.has(dev):
+			add_content(dev, "develop")
+
 	$Panel.visible = true
 
 
-
-func _on_ExitButton_button_down():
+func _invisible():
 	$Panel.visible = false
 	$Dialogue.visible = false
-	$Player/Actions.visible = false
+	$Player/Actions. visible = false
 	for child in $Panel/Scroll/List.get_child_count():
 		$Panel/Scroll/List.get_child(child).queue_free()
+
+
+func _on_ExitButton_button_down():
+	_invisible()
+
+
+func _on_Player__invisible():
+	_invisible()
