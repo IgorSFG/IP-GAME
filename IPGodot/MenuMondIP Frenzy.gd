@@ -11,8 +11,7 @@ var velocidade = 5
 func _ready():
 	$VBoxContainer/JogarButton.grab_focus()
 
-func _on_JogarButton_pressed():
-		GameManager.health_score = 1000
+func _on_JogarButton_pressed(): 
 		get_tree().change_scene("")
 	
 func _on_SairButton_pressed():
@@ -22,11 +21,3 @@ func _on_SairButton_pressed():
 
 	$AudioStreamPlayer.stop()
 	
-
-
-func _on_TextureButton_pressed():
-	GameManager.toggleMute()
-	if !GameManager.is_muted:
-		$TextureButton.texture_normal = unmuted_texture
-	else: 
-		$TextureButton.texture_normal = muted_texture
