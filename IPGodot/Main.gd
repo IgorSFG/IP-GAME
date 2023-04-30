@@ -12,10 +12,11 @@ const LRNcontent = listcontents.LRNcontent
 const intro = listcontents.introduce
 const miss = listcontents.missing
 const feels = listcontents.feels
+const events = listcontents.events
 
-const daytime = 0.1
+const daytime = 1
 
-var namee = ""
+var namee = "Sr Pirinson"
 var contents = []
 
 var timer = Timer.new()
@@ -24,9 +25,14 @@ var month = 0
 
 signal daypassed(day)
 signal contentDeveloped(content)
+signal contentLearned(content)
+signal eventOcurred(event)
 
 func _ready():
 	_invisible()
+	$AudioStreamPlayer2D.playing = true
+	showDialogue(intro)
+	
 	timer.connect("timeout",self,"timeLefting")
 	timer.wait_time = daytime
 	timer.one_shot = false
@@ -41,7 +47,7 @@ func timeLefting():
 	if day >= 30:
 		day = 0
 		month += 1
-		if month >= 6:
+		if month >= 3:
 			Events()
 			month = 0
 		
@@ -50,10 +56,17 @@ func showDialogue(dialogue):
 	$Dialogue/ColorRect/Text.text = str(namee) + ": " + str(dialogue)
 	
 func Events():
+	var something = false
 	for ip in IPcontent:
-		if contents.has(ip):
+		if !contents.has(ip):
+			something = true
 			var pos = IPcontent.find(ip)
-			showDialogue(feels[pos])
+			var event = 0
+			showDialogue(events[event])
+			emit_signal("eventOcurred", event)
+			return
+	if !something:
+		showDialogue(events[-1])
 
 func add_content(value, context):
 	var content = ListContents.instance()
@@ -83,6 +96,7 @@ func contentLearned(content):
 			var pos = IPcontent.find(content)
 			add_content(LRNcontent[pos], "0")
 			$Panel.visible = true
+			emit_signal("contentLearned", feels[pos])
 
 
 func _on_Player_search_pressed(level):
@@ -114,6 +128,8 @@ func _on_Player_develop_pressed(level):
 
 	$Panel.visible = true
 
+func _on_Player_feelings_pressed(content):
+	showDialogue(content)
 
 func _invisible():
 	$Panel.visible = false

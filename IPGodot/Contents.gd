@@ -20,13 +20,12 @@ const LRNcontent = ["Intellectual property refers to the rights that creators ha
 "Violations of intellectual property occur when someone uses, copies, or distributes another person's intellectual creation without proper authorization or payment. They can have serious consequences, including legal action, fines, and damages, and can negatively impact owners of intellectual property. It is crucial to respect and protect intellectual property to ensure continued innovation and creativity."]
 
 # Feelings:
-const introduce = "Let's develop something. I need gain some momey or I will break at the end of the month..."
+const introduce = "Let's develop something. I need gain some money or I will break at the end of the month... Click Me!"
 
 const missing = ["Hummmm... I need search for something to develop first!",
 "Hummm... I'm at end of the month and I have to pay the rent. "]
 
-const feels = ["Beatiful day :D",
-"Interesting, with intellectual property, I can have rights about my creations!",
+const feels = ["Interesting, with intellectual property, I can have rights about my creations!",
 "Copyrights, trademarks, patents, industrial designs, trade secrets and plant varieties, huh?",
 "It's awesome that IP encourages creativity and innovation",
 "What type of intellectual property do I have...",
@@ -35,5 +34,6 @@ const feels = ["Beatiful day :D",
 "Someone can use my IPs... I need portect them!"]
 
 #Events
-const events = ["Someone are using my creations like owners? That will impact my products for sure...",
-"Others are using my IPs without permission! I need protect them somehow..."]
+const events = ["Someone are using my creations like owners? That will impact my products for sure... I need learn more about IPs",
+"Others are using my IPs without permission! I need protect them somehow...",
+"Hahah, they tried to steal my IPs, but thanks my research I'm safe"]

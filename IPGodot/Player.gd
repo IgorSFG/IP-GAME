@@ -7,13 +7,15 @@ signal historic_pressed
 signal _invisible
 
 var money = 1000
-var generallevel = 0
+var generallevel = 100
 var booklevel = 0
 var artlevel = 0
 var applevel = 0
 var musiclevel = 0
 var marklevel = 0
 var patentlevel = 0
+
+var feelings = "Beatiful day :D"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,7 +29,7 @@ func levelUP(level, xp):
 	level += xp
 	generallevel += xp
 	$HUD/GridContainer/GeneralLevel.text = "General Level: " + str(generallevel)
-	gainMoney(100*level)
+	gainMoney(5*level)
 	return level
 
 func gainMoney(gain):
@@ -37,6 +39,7 @@ func gainMoney(gain):
 func payMoney(pay):
 	money = round(money - pay)
 	$HUD/GridContainer/Money.text = "$" + str(money)
+	if money <= 0: get_tree().change_scene("res://gameover.tscn")
 	
 func _on_Main_daypassed(day):
 	$HUD/GridContainer/Day.text = "Day: " + str(day)
@@ -48,6 +51,9 @@ func _on_GoActions_toggled(_button_pressed):
 
 func _on_Search_button_down():
 	emit_signal("search_pressed", generallevel)
+	
+func _on_Main_contentLearned(content):
+	feelings = content
 
 
 func _on_Develop_button_down():
@@ -64,8 +70,20 @@ func _on_Main_contentDeveloped(content):
 
 
 func _on_Feelings_button_down():
-	emit_signal("feelings_pressed")
+	emit_signal("feelings_pressed", feelings)
 
 
 func _on_Historic_button_down():
 	emit_signal("historic_pressed")
+
+
+func _on_Main_eventOcurred(event):
+	if booklevel >= 2: booklevel -= (1 - event)
+	if artlevel >= 2: artlevel -= (1 - event)
+	if applevel >= 2: applevel -= (1 - event)
+	if musiclevel >= 2: musiclevel -= (1 - event)
+	if marklevel >= 2: marklevel -= (1 - event)
+	if patentlevel >= 2: patentlevel -= (1 - event)
+	generallevel = booklevel + artlevel + applevel + musiclevel + marklevel + patentlevel
+	$HUD/GridContainer/GeneralLevel.text = "General Level: " + str(generallevel)
+

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Som menu.wav-1eddda64dea14c568b01410ca16418e8.sample"
+path="res://.import/Som jogo.wav-5db7298b11cdbbad03b56347dc4ff532.sample"
 
 [deps]
 
-source_file="res://sounds/Som menu.wav"
-dest_files=[ "res://.import/Som menu.wav-1eddda64dea14c568b01410ca16418e8.sample" ]
+source_file="res://Arts/Som jogo.wav"
+dest_files=[ "res://.import/Som jogo.wav-5db7298b11cdbbad03b56347dc4ff532.sample" ]
 
 [params]
 
