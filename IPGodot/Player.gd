@@ -6,9 +6,8 @@ signal feelings_pressed
 signal historic_pressed
 signal _invisible
 
-var namee = ""
 var money = 1000
-var generallevel = 5
+var generallevel = 0
 var booklevel = 0
 var artlevel = 0
 var applevel = 0
@@ -52,7 +51,7 @@ func _on_Search_button_down():
 
 
 func _on_Develop_button_down():
-	emit_signal("develop_pressed", generallevel, namee)
+	emit_signal("develop_pressed", generallevel)
 	
 func _on_Main_contentDeveloped(content):
 	if content == "Book": booklevel = levelUP(booklevel, 1)
@@ -65,7 +64,7 @@ func _on_Main_contentDeveloped(content):
 
 
 func _on_Feelings_button_down():
-	emit_signal("feelings_pressed", namee)
+	emit_signal("feelings_pressed")
 
 
 func _on_Historic_button_down():

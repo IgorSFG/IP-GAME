@@ -11,14 +11,16 @@ const LRNcontent = listcontents.LRNcontent
 #Feelings
 const intro = listcontents.introduce
 const miss = listcontents.missing
-const doubt = listcontents.doubts
+const feels = listcontents.feels
 
 const daytime = 0.1
 
+var namee = ""
 var contents = []
 
 var timer = Timer.new()
 var day = 1
+var month = 0
 
 signal daypassed(day)
 signal contentDeveloped(content)
@@ -34,12 +36,24 @@ func _ready():
 func timeLefting():
 	day += 1
 	emit_signal("daypassed", day)
+	if day == 27:
+		showDialogue(miss[1])
 	if day >= 30:
 		day = 0
+		month += 1
+		if month >= 6:
+			Events()
+			month = 0
 		
-func showDialogue(dialogue, namee):
+func showDialogue(dialogue):
 	$Dialogue.visible = true
 	$Dialogue/ColorRect/Text.text = str(namee) + ": " + str(dialogue)
+	
+func Events():
+	for ip in IPcontent:
+		if contents.has(ip):
+			var pos = IPcontent.find(ip)
+			showDialogue(feels[pos])
 
 func add_content(value, context):
 	var content = ListContents.instance()
@@ -55,7 +69,7 @@ func add_content(value, context):
 	
 func contentSearched(content):
 	print("Searching...")
-	if contents.has(content) or contents.has(content): return
+	if contents.has(content): return
 	contents.append(content)
 	_invisible()
 	contentLearned(content)
@@ -88,10 +102,10 @@ func _on_Player_search_pressed(level):
 		
 	$Panel.visible = true
 
-func _on_Player_develop_pressed(level, namee):
+func _on_Player_develop_pressed(level):
 	print("Develop Pressed")
 	if contents.empty(): 
-		showDialogue(miss[0], namee)
+		showDialogue(miss[0])
 		return
 		
 	for dev in contents:

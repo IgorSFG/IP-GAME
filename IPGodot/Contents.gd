@@ -23,6 +23,17 @@ const LRNcontent = ["Intellectual property refers to the rights that creators ha
 const introduce = "Let's develop something. I need gain some momey or I will break at the end of the month..."
 
 const missing = ["Hummmm... I need search for something to develop first!",
-"Oh no! I'm at end of the month... And I have no money!!!"]
+"Hummm... I'm at end of the month and I have to pay the rent. "]
 
-const doubts = [""]
+const feels = ["Beatiful day :D",
+"Interesting, with intellectual property, I can have rights about my creations!",
+"Copyrights, trademarks, patents, industrial designs, trade secrets and plant varieties, huh?",
+"It's awesome that IP encourages creativity and innovation",
+"What type of intellectual property do I have...",
+"Mayebe will be better If I protect my IPs...",
+"Hummmm... Comenrcialize my IP, huh?",
+"Someone can use my IPs... I need portect them!"]
+
+#Events
+const events = ["Someone are using my creations like owners? That will impact my products for sure...",
+"Others are using my IPs without permission! I need protect them somehow..."]
