@@ -125,10 +125,10 @@ __meta__ = {
 }
 
 [node name="HUD" type="Control" parent="."]
-margin_left = -99.0
-margin_top = -65.0
-margin_right = -39.0
-margin_bottom = -31.0
+margin_left = -116.0
+margin_top = -72.0
+margin_right = -56.0
+margin_bottom = -38.0
 rect_scale = Vector2( 0.5, 0.5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -166,9 +166,8 @@ custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Day: 1"
 
-[node name="Camera2D" type="Camera2D" parent="HUD"]
-position = Vector2( 200, 100 )
-scale = Vector2( 2, 2 )
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1, -15 )
 current = true
 zoom = Vector2( 0.15, 0.15 )
 

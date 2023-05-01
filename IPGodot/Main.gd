@@ -16,7 +16,7 @@ const events = listcontents.events
 
 const daytime = 1
 
-var namee = "Sr Pirinson"
+var namee = "Sr. Pirinson"
 var contents = []
 
 var timer = Timer.new()
